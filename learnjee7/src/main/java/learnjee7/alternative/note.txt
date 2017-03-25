@@ -1,0 +1,7 @@
+depending on the setting in beans.xml
+
+	<alternatives>
+		<class>learnjee7.alternative.FileSource</class>
+	</alternatives>
+	
+corresponding implementation of Source.java can be injected -> FileSource.java

@@ -1,17 +1,15 @@
 package learnjee7.instance;
 
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Instance;
-import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
-
 import learnjee7.alternative.Source;
 
 public class ClearingFileProcessor2 {
 
-	private static final String CARDSCEHEME = "VIS";
+	private static final String CARDSCEHEME = "MCI";
 	
-	@Inject Validator validator;
+	@Inject 
+	//@CardScheme(type=CardSchemeType.VISA) 
+	Validator validator;
 	
 	@Inject Source source;
 	

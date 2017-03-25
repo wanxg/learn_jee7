@@ -1,0 +1,51 @@
+1. 如何inject不同interface的implementation classes?
+
+静态 a.  使用 @Alternative 在不同的implementation classes， 然后在beans.xml里指定某一个implementation class，被指定的会被inject
+
+<alternatives>
+		<class>learnjee7.alternative.FileSource</class>
+</alternatives>
+
+静态 b.  用自定义的annotations在不同的implementation class上标记
+
+@MasterCard
+public class MasterCardValidator implements Validator { .... }
+
+inject的时候通过指他定某个Annotation来注入其对应的implementation class
+
+@Inject @MasterCard Validator validator;
+
+静态 c. 通过带有@Produces的方法来选择某个implementation
+
+public class ValidatorFactory {
+	
+	private CardSchemeType type = CardSchemeType.MasterCard;
+	
+	@Produces
+	public Validator retrieveValidator(){
+		
+		switch(type) {
+		case MasterCard:
+			return new MasterCardValidator();
+		case VISA:
+			return new VisaValidator();
+		default:
+			return null;
+		}
+	}
+}
+
+当Inject Validator的时候，producer方法会自动被调用并返回某个implementation
+
+@Inject Validator validator;
+
+动态 d.  结合静态b里面的自定义annotations, 先使用 @Inject @Any 来注入 Instance<T>, 对象： 
+
+@Inject @Any Instance<Validator> validatorSource;
+
+然后可以在程序中动态加载某个implementation class
+
+Validator validator  = validatorSource.select(new AnnotationLiteral<MasterCard>() {}).get();
+
+其中MasterCard是使用在某个Validator implementation class上的annotation
+

@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import javax.ejb.embeddable.EJBContainer;
 import javax.inject.Inject;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,6 +22,13 @@ public class ClearingFileProcessorTest {
         container = EJBContainer.createEJBContainer();
         container.getContext().bind("inject", this);
     }
+    
+    @After
+	public void cleanUp() throws Exception {
+		container.getContext().unbind("inject");
+		container.getContext().close();
+	}
+    
     @Test
     public void testFileParser(){
     	

@@ -9,7 +9,7 @@ import learnjee7.alternative.Source;
 
 public class ClearingFileProcessor {
 
-	private static final String CARDSCEHEME = "VIS";
+	private static final String CARDSCEHEME = "MCI";
 	
 	@Inject @Any Instance<Validator> validatorSource;
 	

@@ -4,7 +4,7 @@ import javax.enterprise.inject.Produces;
 
 public class ValidatorFactory {
 	
-	private CardSchemeType type;
+	private CardSchemeType type = CardSchemeType.MasterCard;
 	
 	@Produces
 	public Validator retrieveValidator(){
